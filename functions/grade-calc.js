@@ -3,8 +3,8 @@
 //90-100 A and so on
 //call function and print string, 15 and 20
 
-let gradeCalc = function (studentScore, totalPossibleScore = 20) {
-    let perc = studentScore * 100 / totalPossibleScore
+const gradeCalc = function (studentScore, totalPossibleScore = 20) {
+    const perc = studentScore * 100 / totalPossibleScore
     let grade
     if (perc >= 90 && perc <= 100) {
         grade = 'A'
@@ -25,5 +25,5 @@ let gradeCalc = function (studentScore, totalPossibleScore = 20) {
     return `Your grade is ${grade} with a score of ${perc}%`
 }
 
-let result = gradeCalc(5,10)
+const result = gradeCalc(5,10)  // const only because it is references once
 console.log(result)
