@@ -11,3 +11,7 @@ console.log(todo)
 console.log(`You have ${todo.length} todos`)
 console.log(todo[0])
 console.log(todo[todo.length-2])
+
+todo.forEach(function (item, index) {
+    console.log(`${index + 1}. ${item}`)
+})

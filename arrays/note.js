@@ -12,7 +12,12 @@ console.log(notes)
 
 notes[2] = 'This is the new extra note' // replaces item at that position
 
+notes.forEach(function (item, index) {
+    console.log(`${item} ${index}`)
+})
+
 console.log(notes.length) // length of array
 console.log(notes)
 console.log(notes[0])// first item
 console.log(notes[notes.length-1]) // item in array at position 0
+
