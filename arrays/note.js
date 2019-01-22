@@ -12,7 +12,7 @@ console.log(notes)
 
 notes[2] = 'This is the new extra note' // replaces item at that position
 
-notes.forEach(function (item, index) {
+notes.forEach(function (item, index) { // loops each item in the array and we are given arguments of the item in the array and the index of the item
     console.log(`${item} ${index}`)
 })
 
