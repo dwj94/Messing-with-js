@@ -12,6 +12,10 @@ console.log(`You have ${todo.length} todos`)
 console.log(todo[0])
 console.log(todo[todo.length-2])
 
-todo.forEach(function (item, index) {
+todo.forEach(function (item, index) { // print a nice to do list
     console.log(`${index + 1}. ${item}`)
 })
+
+for (let i = 0; i < todo.length; i++) {
+    console.log(`${i+1}. ${todo[i]}`)
+}

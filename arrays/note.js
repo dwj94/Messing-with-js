@@ -21,3 +21,11 @@ console.log(notes)
 console.log(notes[0])// first item
 console.log(notes[notes.length-1]) // item in array at position 0
 
+// Connecting...
+for (let count = 0; count <= 2; count++) {
+    console.log(count)
+}
+
+for (let count = notes.length - 1 ; count >= 0; count--) {
+    console.log(notes[count])
+}
