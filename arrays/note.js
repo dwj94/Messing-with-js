@@ -25,24 +25,40 @@ const notes = [{
 //     console.log(`${item} ${index}`)
 // })
 
-console.log(notes.length) // length of array
-console.log(notes)
-console.log(notes[0])// first item
-console.log(notes[notes.length-1]) // item in array at position 0
+// console.log(notes.length) // length of array
+// console.log(notes)
+// console.log(notes[0])// first item
+// console.log(notes[notes.length-1]) // item in array at position 0
 
-// Connecting...
-for (let count = 0; count <= 2; count++) {
-    console.log(count)
+// // Connecting...
+// for (let count = 0; count <= 2; count++) {
+//     console.log(count)
+// }
+
+// for (let count = notes.length - 1 ; count >= 0; count--) {
+//     console.log(notes[count])
+// }
+
+// const findNote = function(notes, noteTitle) {
+//     const index = notes.findIndex(function (note, index){
+//         return note.title.toLowerCase() === noteTitle.toLowerCase()
+//     })
+//     return notes[index]
+// }
+
+const findNote = function(notes, noteTitle) {
+    return notes.find(function (note, index){
+        return note.title.toLowerCase() === noteTitle.toLowerCase()
+    })
 }
 
-for (let count = notes.length - 1 ; count >= 0; count--) {
-    console.log(notes[count])
-}
+const note = findNote(notes, 'note3')
+console.log(note)
 
-console.log(notes.indexOf('MyNote1'))
+// console.log(notes.indexOf('MyNote1'))
 
-const index = notes.findIndex(function (note, index) {
-    return note.title === 'Note 2'
-})
+// const index = notes.findIndex(function (note, index) {
+//     return note.title === 'Note 2'
+// })
 
-console.log(index)
+// console.log(index)
