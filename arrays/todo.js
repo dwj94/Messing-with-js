@@ -24,7 +24,7 @@ const todo = ['Todo1', 'Todo2', 'Todo3', 'Todo4', 'Todo5']
 todo.forEach(function(item, index) {
     todo.splice(index, 1, {text: item, completed: (Math.random() < 0.5)})
 })
-console.log(todo)
+// console.log(todo)
 
 // deletes a todo that matches the text
 const deleteTodo = function (todo, texts) {
@@ -44,4 +44,17 @@ const getThingsToDo = function (todos) {
     })
 }
 
-console.log(getThingsToDo(todo))
+const sortTodo = function (todos) {
+    todos.sort(function (a, b) {
+        if (a.completed && !b.completed) {
+            return -1
+        } else if (!a.completed && b.completed) {
+            return 1
+        } else {
+            return 0
+        }
+    })
+}
+
+sortTodo(todo)
+console.log(todo)
