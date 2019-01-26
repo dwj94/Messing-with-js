@@ -62,3 +62,14 @@ console.log(note)
 // })
 
 // console.log(index)
+
+const findNotes = function (notes, query) {
+    return notes.filter(function (note, index) {
+        const isTitleMatch = note.title.toLowerCase().includes(query.toLowerCase())
+        const isBodyMatch = note.body.toLowerCase().includes(query.toLowerCase())
+        return isBodyMatch || isTitleMatch
+    })
+}
+
+
+console.log(findNotes(notes, '2'))

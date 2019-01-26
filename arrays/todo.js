@@ -20,10 +20,11 @@ const todo = ['Todo1', 'Todo2', 'Todo3', 'Todo4', 'Todo5']
 //     console.log(`${i+1}. ${todo[i]}`)
 // }
 
-// turns todo array into array of objects
+// turns todo array into array of objects with random choice whether it has been completed or not
 todo.forEach(function(item, index) {
-    todo.splice(index, 1, {text: item, completed: false})
+    todo.splice(index, 1, {text: item, completed: (Math.random() < 0.5)})
 })
+console.log(todo)
 
 // deletes a todo that matches the text
 const deleteTodo = function (todo, texts) {
@@ -37,5 +38,10 @@ const deleteTodo = function (todo, texts) {
     }
 }
 
-deleteTodo(todo, 'Todo2')
-console.log(todo)
+const getThingsToDo = function (todos) {
+    return todos.filter(function (todo, index) {
+        return !todo.completed
+    })
+}
+
+console.log(getThingsToDo(todo))
