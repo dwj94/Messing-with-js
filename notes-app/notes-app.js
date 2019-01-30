@@ -13,12 +13,21 @@ const notes = [{
     body: 'body3'
 }]
 
-const ps = document.querySelectorAll('p')
-ps.forEach(function (item, index){
-    item.textContent = '**'
-    // item.remove()
-})
+// const ps = document.querySelectorAll('p')
+// ps.forEach(function (item, index){
+//     item.textContent = '**'
+//     // item.remove()
+// })
 
-const newPar = document.createElement('p')
-newPar.textContent = 'This is a new element from JS'
-document.querySelector('body').appendChild(newPar)
+// const newPar = document.createElement('p')
+// newPar.textContent = 'This is a new element from JS'
+// document.querySelector('body').appendChild(newPar)
+
+document.querySelector('button').addEventListener('click', function (e) {
+    console.log(e)
+    if (e.target.textContent === 'Button clicked'){
+        e.target.textContent = 'Add note'
+    } else{
+        e.target.textContent = 'Button clicked'
+    }
+})

@@ -29,4 +29,12 @@ const remaining = document.createElement('h4')
 remaining.textContent = `You have ${remainingCount} todo's remaining`
 document.querySelector('body').appendChild(remaining)
 
+document.querySelector('button').addEventListener('click', function (e) {
+    console.log(e)
+    if (e.target.textContent === 'Button clicked'){
+        e.target.textContent = 'Add note'
+    } else{
+        e.target.textContent = 'Button clicked'
+    }
+})
 
