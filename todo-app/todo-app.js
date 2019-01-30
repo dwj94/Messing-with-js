@@ -32,7 +32,7 @@ document.querySelector('body').appendChild(remaining)
 document.querySelector('button').addEventListener('click', function (e) {
     console.log(e)
     if (e.target.textContent === 'Button clicked'){
-        e.target.textContent = 'Add note'
+        e.target.textContent = 'Add Todo'
     } else{
         e.target.textContent = 'Button clicked'
     }
