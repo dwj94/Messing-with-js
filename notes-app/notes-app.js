@@ -23,11 +23,17 @@ const notes = [{
 // newPar.textContent = 'This is a new element from JS'
 // document.querySelector('body').appendChild(newPar)
 
-document.querySelector('button').addEventListener('click', function (e) {
+document.querySelector('#create-note').addEventListener('click', function (e) {
     console.log(e)
     if (e.target.textContent === 'Button clicked'){
         e.target.textContent = 'Add note'
     } else{
         e.target.textContent = 'Button clicked'
     }
+})
+
+document.querySelector('button#remove-all').addEventListener('click', function () {
+    document.querySelectorAll('.note').forEach(function (item, index) {
+        item.remove()
+    })
 })
