@@ -38,3 +38,6 @@ document.querySelector('#add-todo').addEventListener('click', function (e) {
     }
 })
 
+document.querySelector('#add-text').addEventListener('input', function (e) {
+    console.log(e.target.value)
+})
