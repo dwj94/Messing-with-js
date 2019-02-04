@@ -23,6 +23,26 @@ const notes = [{
 // newPar.textContent = 'This is a new element from JS'
 // document.querySelector('body').appendChild(newPar)
 
+const filters = {
+    searchText: ''
+}
+
+const renderNotes = function (notes, filters) {
+    const filteredNotes = notes.filter(function (note) {
+        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
+    })
+    
+    if (notes.length > 0) {
+        document.querySelector('#notes').innerHTML = '' 
+    }
+
+    filteredNotes.forEach(function (item, index) {
+        const newNote = document.createElement('p')
+        newNote.textContent = item.title
+        document.querySelector('#notes').appendChild(newNote)
+    })
+}
+
 document.querySelector('#create-note').addEventListener('click', function (e) {
     console.log(e)
     if (e.target.textContent === 'Button clicked'){
@@ -33,11 +53,13 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
 })
 
 document.querySelector('button#remove-all').addEventListener('click', function () {
-    document.querySelectorAll('.note').forEach(function (item, index) {
+    document.querySelectorAll('div#notes > p').forEach(function (item, index) {
         item.remove()
     })
+    notes.splice(0, notes.length)
 })
 
 document.querySelector('#search-text').addEventListener('input', function (e) {
-    console.log(e.target.value)
+    filters.searchText = e.target.value
+    renderNotes(notes, filters)
 })
