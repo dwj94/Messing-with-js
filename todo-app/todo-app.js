@@ -7,13 +7,15 @@
 //     }
 // })
 
-const todo = ['Clean the car', 'Was the dishes', 'Take out rubbish', 'Finish course', 'Clean floor']
+const todo = ['Clean the car', 'Wash the dishes', 'Take out rubbish', 'Finish course', 'Clean floor']
 
 todo.forEach(function (item, index) {
     todo.splice(index, 1, {text: item, completed: (Math.random() < 0.5)})
 })
-// you have x todos left
-// add a p value
+
+const filters = {
+    searchText: ''
+}
 
 let remainingCount = 0
 todo.forEach(function (item, index) {
@@ -21,13 +23,29 @@ todo.forEach(function (item, index) {
         remainingCount += 1
         const remainingTodo = document.createElement('p')
         remainingTodo.textContent = item.text
-        document.querySelector('body').appendChild(remainingTodo)
+        document.querySelector('#todos').appendChild(remainingTodo)
     }
 })
 
 const remaining = document.createElement('h4')
 remaining.textContent = `You have ${remainingCount} todo's remaining`
 document.querySelector('body').appendChild(remaining)
+
+const renderSearch = function (toDos, filter) {
+    const filteredToDos = toDos.filter(function (todo) {
+        const completedToDo = todo.completed
+        const matchedToDo = todo.text.toLowerCase().includes(filter.searchText.toLowerCase())
+        return !completedToDo && matchedToDo
+    })
+
+    document.querySelector('#todos').innerHTML = ''
+
+    filteredToDos.forEach(function (item, index) {
+        const toDoSearch = document.createElement('p')
+        toDoSearch.textContent = item.text
+        document.querySelector('#todos').appendChild(toDoSearch)
+    })
+}
 
 document.querySelector('#add-todo').addEventListener('click', function (e) {
     console.log(e)
@@ -40,4 +58,12 @@ document.querySelector('#add-todo').addEventListener('click', function (e) {
 
 document.querySelector('#add-text').addEventListener('input', function (e) {
     console.log(e.target.value)
+})
+
+
+document.querySelector('#search-text').addEventListener('input', function (e) {
+    console.log(e.target.value)
+
+    filters.searchText = e.target.value
+    renderSearch(todo, filters)
 })
