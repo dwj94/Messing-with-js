@@ -52,14 +52,13 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
     }
 })
 
-document.querySelector('button#remove-all').addEventListener('click', function () {
-    document.querySelectorAll('div#notes > p').forEach(function (item, index) {
-        item.remove()
-    })
-    notes.splice(0, notes.length)
-})
-
 document.querySelector('#search-text').addEventListener('input', function (e) {
     filters.searchText = e.target.value
     renderNotes(notes, filters)
+})
+
+document.querySelector('#name-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    console.log(e.target.elements.firstName.value)
+    e.target.elements.firstName.value = ''
 })

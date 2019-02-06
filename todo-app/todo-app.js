@@ -9,7 +9,7 @@
 
 const todo = ['Clean the car', 'Wash the dishes', 'Take out rubbish', 'Finish course', 'Clean floor']
 
-todo.forEach(function (item, index) {
+todo.forEach(function (item, index) { // just seeding the todo array of objects with some random todos
     todo.splice(index, 1, {text: item, completed: (Math.random() < 0.5)})
 })
 
@@ -47,23 +47,27 @@ const renderSearch = function (toDos, filter) {
     })
 }
 
-document.querySelector('#add-todo').addEventListener('click', function (e) {
-    console.log(e)
-    if (e.target.textContent === 'Button clicked'){
-        e.target.textContent = 'Add Todo'
-    } else{
-        e.target.textContent = 'Button clicked'
-    }
-})
-
-document.querySelector('#add-text').addEventListener('input', function (e) {
-    console.log(e.target.value)
-})
-
 
 document.querySelector('#search-text').addEventListener('input', function (e) {
     console.log(e.target.value)
 
     filters.searchText = e.target.value
     renderSearch(todo, filters)
+})
+
+document.querySelector('#add-todo').addEventListener('submit', function (e) {
+    e.preventDefault()
+    todo.push({text: e.target.elements.toDo.value, completed: false})
+    e.target.elements.toDo.value = ''
+    renderSearch(todo, filters)
+    
+    let remainingCount = 0
+    todo.forEach(function (item, index) {
+        if (!item.completed) {
+            remainingCount += 1
+        }
+    })
+
+    const remaining = document.querySelector('h4')
+    remaining.textContent = `You have ${remainingCount} todo's remaining`
 })
