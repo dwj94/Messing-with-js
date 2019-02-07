@@ -14,28 +14,32 @@ todo.forEach(function (item, index) { // just seeding the todo array of objects 
 })
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    completed: ''
 }
 
 let remainingCount = 0
 todo.forEach(function (item, index) {
     if (!item.completed) {
         remainingCount += 1
-        const remainingTodo = document.createElement('p')
-        remainingTodo.textContent = item.text
-        document.querySelector('#todos').appendChild(remainingTodo)
     }
+    const remainingTodo = document.createElement('p')
+    remainingTodo.textContent = item.text
+    document.querySelector('#todos').appendChild(remainingTodo)
 })
 
 const remaining = document.createElement('h4')
-remaining.textContent = `You have ${remainingCount} todo's remaining`
+remaining.textContent = `You have ${remainingCount} todo's to complete`
 document.querySelector('body').appendChild(remaining)
 
 const renderSearch = function (toDos, filter) {
     const filteredToDos = toDos.filter(function (todo) {
-        const completedToDo = todo.completed
+        let showAll = true
+        if (filter.completed === false) {
+            showAll = todo.completed === filter.completed
+        }
         const matchedToDo = todo.text.toLowerCase().includes(filter.searchText.toLowerCase())
-        return !completedToDo && matchedToDo
+        return matchedToDo && showAll
     })
 
     document.querySelector('#todos').innerHTML = ''
@@ -49,8 +53,6 @@ const renderSearch = function (toDos, filter) {
 
 
 document.querySelector('#search-text').addEventListener('input', function (e) {
-    console.log(e.target.value)
-
     filters.searchText = e.target.value
     renderSearch(todo, filters)
 })
@@ -69,5 +71,14 @@ document.querySelector('#add-todo').addEventListener('submit', function (e) {
     })
 
     const remaining = document.querySelector('h4')
-    remaining.textContent = `You have ${remainingCount} todo's remaining`
+    remaining.textContent = `You have ${remainingCount} todo's to complete`
+})
+
+document.querySelector('#hide').addEventListener('change', function (e) {
+    if (e.target.checked) {
+        filters.completed = false
+    } else {
+        filters.completed = ''
+    }
+    renderSearch(todo, filters)
 })
