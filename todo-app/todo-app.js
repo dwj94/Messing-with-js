@@ -1,11 +1,4 @@
-// const ps = document.querySelectorAll('p')
-
-// ps.forEach(function (item, index) {
-//     // console.log(index)
-//     if (item.textContent.includes('the')){
-//         item.remove()
-//     }
-// })
+// comment this file
 
 const todo = ['Clean the car', 'Wash the dishes', 'Take out rubbish', 'Finish course', 'Clean floor']
 
