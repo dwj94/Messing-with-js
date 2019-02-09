@@ -8,7 +8,7 @@ todo.forEach(function (item, index) { // just seeding the todo array of objects 
 
 const filters = {
     searchText: '',
-    completed: ''
+    hideCompleted: ''
 }
 
 let remainingCount = 0
@@ -27,12 +27,9 @@ document.querySelector('body').appendChild(remaining)
 
 const renderSearch = function (toDos, filter) {
     const filteredToDos = toDos.filter(function (todo) {
-        let showAll = true
-        if (filter.completed === false) {
-            showAll = todo.completed === filter.completed
-        }
+        let show = !filters.hideCompleted || !todo.completed
         const matchedToDo = todo.text.toLowerCase().includes(filter.searchText.toLowerCase())
-        return matchedToDo && showAll
+        return matchedToDo && show
     })
 
     document.querySelector('#todos').innerHTML = ''
@@ -68,10 +65,6 @@ document.querySelector('#add-todo').addEventListener('submit', function (e) {
 })
 
 document.querySelector('#hide').addEventListener('change', function (e) {
-    if (e.target.checked) {
-        filters.completed = false
-    } else {
-        filters.completed = ''
-    }
+    filters.hideCompleted = e.target.checked
     renderSearch(todo, filters)
 })
