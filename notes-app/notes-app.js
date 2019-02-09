@@ -3,14 +3,14 @@
 // const p = document.querySelector('p')
 // p.remove()
 const notes = [{
-    title: 'Bote 1', 
-    body: 'body1'
+    title: 'Is this a fun course', 
+    body: 'I think it is'
 }, {
-    title: 'Aote 2', 
-    body: 'body2',
+    title: 'Weather on saturday is windy', 
+    body: 'Yeah, 25mph or more'
 }, {
-    title: 'aote3',
-    body: 'body3'
+    title: 'Rugby on Sunday',
+    body: 'Lets watch it'
 }]
 
 // const ps = document.querySelectorAll('p')
@@ -26,6 +26,13 @@ const notes = [{
 const filters = {
     searchText: ''
 }
+
+notes.forEach(function (item, index) {
+    const newNote = document.createElement('p')
+    newNote.textContent = item.title
+    document.querySelector('#notes').appendChild(newNote)
+})
+
 
 const renderNotes = function (notes, filters) {
     const filteredNotes = notes.filter(function (note) {
