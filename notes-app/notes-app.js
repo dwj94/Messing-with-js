@@ -13,6 +13,19 @@ const notes = [{
     body: 'Lets watch it'
 }]
 
+// const nameUser = {
+//     name: 'Dan',
+//     age: 27
+// }
+
+// const userJson = JSON.stringify(nameUser) // only strings can be stored in localstorage
+// console.log(userJson)
+// localStorage.setItem('user', userJson)
+
+const userJson = localStorage.getItem('user')
+const user = JSON.parse(userJson)
+console.log(`${user.name} is ${user.age}`)
+
 // const ps = document.querySelectorAll('p')
 // ps.forEach(function (item, index){
 //     item.textContent = '**'
