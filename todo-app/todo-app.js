@@ -1,10 +1,12 @@
 // comment this file
 
-const todo = ['Clean the car', 'Wash the dishes', 'Take out rubbish', 'Finish course', 'Clean floor']
+let todo = []
 
-todo.forEach(function (item, index) { // just seeding the todo array of objects with some random todos
-    todo.splice(index, 1, {text: item, completed: (Math.random() < 0.5)})
-})
+const todoJSON = localStorage.getItem('todo')
+
+if (todoJSON !== null) {
+    todo = JSON.parse(todoJSON)
+}
 
 const filters = {
     searchText: '',
@@ -16,9 +18,6 @@ todo.forEach(function (item, index) {
     if (!item.completed) {
         remainingCount += 1
     }
-    const remainingTodo = document.createElement('p')
-    remainingTodo.textContent = item.text
-    document.querySelector('#todos').appendChild(remainingTodo)
 })
 
 const remaining = document.createElement('h4')
@@ -41,6 +40,8 @@ const renderSearch = function (toDos, filter) {
     })
 }
 
+renderSearch(todo, filters)
+
 
 document.querySelector('#search-text').addEventListener('input', function (e) {
     filters.searchText = e.target.value
@@ -50,6 +51,7 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
 document.querySelector('#add-todo').addEventListener('submit', function (e) {
     e.preventDefault()
     todo.push({text: e.target.elements.toDo.value, completed: false})
+    localStorage.setItem('todo', JSON.stringify(todo))
     e.target.elements.toDo.value = ''
     renderSearch(todo, filters)
     

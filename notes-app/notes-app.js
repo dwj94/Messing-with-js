@@ -1,50 +1,17 @@
-// DOM is Document Object Model
 
-// const p = document.querySelector('p')
-// p.remove()
-const notes = [{
-    title: 'Is this a fun course', 
-    body: 'I think it is'
-}, {
-    title: 'Weather on saturday is windy', 
-    body: 'Yeah, 25mph or more'
-}, {
-    title: 'Rugby on Sunday',
-    body: 'Lets watch it'
-}]
+let notes = []
 
-// const nameUser = {
-//     name: 'Dan',
-//     age: 27
-// }
+// Check for existing saved data
+const notesJSON = localStorage.getItem('notes')
 
-// const userJson = JSON.stringify(nameUser) // only strings can be stored in localstorage
-// console.log(userJson)
-// localStorage.setItem('user', userJson)
+if (notesJSON !== null) {
+    notes = JSON.parse(notesJSON)
+}
 
-const userJson = localStorage.getItem('user')
-const user = JSON.parse(userJson)
-console.log(`${user.name} is ${user.age}`)
-
-// const ps = document.querySelectorAll('p')
-// ps.forEach(function (item, index){
-//     item.textContent = '**'
-//     // item.remove()
-// })
-
-// const newPar = document.createElement('p')
-// newPar.textContent = 'This is a new element from JS'
-// document.querySelector('body').appendChild(newPar)
 
 const filters = {
     searchText: ''
 }
-
-notes.forEach(function (item, index) {
-    const newNote = document.createElement('p')
-    newNote.textContent = item.title
-    document.querySelector('#notes').appendChild(newNote)
-})
 
 
 const renderNotes = function (notes, filters) {
@@ -58,18 +25,25 @@ const renderNotes = function (notes, filters) {
 
     filteredNotes.forEach(function (item, index) {
         const newNote = document.createElement('p')
-        newNote.textContent = item.title
+
+        if (item.title.length > 0) {
+            newNote.textContent = item.title
+        } else {
+            newNote.textContent = 'Unnamed note'
+        }
         document.querySelector('#notes').appendChild(newNote)
     })
 }
 
+renderNotes(notes, filters)
+
 document.querySelector('#create-note').addEventListener('click', function (e) {
-    console.log(e)
-    if (e.target.textContent === 'Button clicked'){
-        e.target.textContent = 'Add note'
-    } else{
-        e.target.textContent = 'Button clicked'
-    }
+    notes.push({
+        title: '',
+        body: ''
+    })
+    localStorage.setItem('notes', JSON.stringify(notes))
+    renderNotes(notes, filters)
 })
 
 document.querySelector('#search-text').addEventListener('input', function (e) {
