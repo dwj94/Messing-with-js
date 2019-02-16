@@ -15,9 +15,7 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
 })
 
 document.querySelector('#add-todo').addEventListener('submit', function (e) {
-    e.preventDefault()
     saveTodos(todo, e)
-    e.target.elements.toDo.value = ''
     renderSearch(todo, filters)
     document.querySelector('h4').replaceWith(countTodos(todo))
 })
