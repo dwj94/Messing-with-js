@@ -35,9 +35,21 @@ const renderSearch = function (toDos, filter) {
 
 // generate the dom elements for individual todos
 const getDomElem = function (item) {
-    const toDoSearch = document.createElement('p')
-    toDoSearch.textContent = item.text
-    return toDoSearch
+    const todoItem = document.createElement('div')
+    const checkbox = document.createElement('input')
+    const text = document.createElement('span')
+    const removeItem = document.createElement('button')
+
+    checkbox.setAttribute('type', 'checkbox')
+    todoItem.appendChild(checkbox)
+
+    text.textContent = item.text
+    todoItem.appendChild(text)
+
+    removeItem.textContent = 'x'
+    todoItem.appendChild(removeItem)
+
+    return todoItem
 }
 
 // count remaining todos and return summary
