@@ -17,14 +17,25 @@ const saveNotes = function (notes) {
 
 // generate the dom structure for a note
 
-const generateNoteDom = function (note) {
+const generateNoteDom = function (note, countNote, notes) {
     const newNote = document.createElement('div')
     const textEl = document.createElement('span')
     const newButton = document.createElement('button')
 
-    // setup the remove note button
+    // setup the delete note button
     newButton.textContent = 'x'
-    newButton.setAttribute('id', 'delete-note')
+    newButton.setAttribute('id', 'delete-note'+countNote)
+    newButton.addEventListener('click', function (e) {
+        const elem = document.getElementById(e.target.id).parentNode
+        const id = e.target.id
+        
+        const idNum = id.substring(11, id.length)
+    
+        // delete from browser and list
+        notes.splice(idNum, 1)
+        saveNotes(notes)
+        elem.parentNode.removeChild(elem)
+    })
     newNote.appendChild(newButton)
 
     if (note.title.length > 0) {
@@ -34,10 +45,11 @@ const generateNoteDom = function (note) {
     }
     // add the text element to the new note
     newNote.appendChild(textEl)
+
     return newNote
 }
 
-// render application notes
+// render application notes, set unique id on note
 const renderNotes = function (notes, filters) {
     const filteredNotes = notes.filter(function (note) {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
@@ -47,8 +59,10 @@ const renderNotes = function (notes, filters) {
         document.querySelector('#notes').innerHTML = '' 
     }
 
+    let countNote = 0
     filteredNotes.forEach(function (item, index) {
-        const newNote = generateNoteDom(item)
+        const newNote = generateNoteDom(item, countNote, notes)
+        countNote += 1
         document.querySelector('#notes').appendChild(newNote)
     })
 }
