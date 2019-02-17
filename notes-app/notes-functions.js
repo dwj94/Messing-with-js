@@ -26,8 +26,9 @@ const generateNoteDom = function (note, countNote, notes) {
     newButton.textContent = 'x'
     newButton.setAttribute('id', 'delete-note'+countNote)
     newButton.addEventListener('click', function (e) {
-        const elem = document.getElementById(e.target.id).parentNode
         const id = e.target.id
+        const elem = document.getElementById(id).parentNode
+        
         
         const idNum = id.substring(11, id.length)
     
@@ -38,6 +39,7 @@ const generateNoteDom = function (note, countNote, notes) {
     })
     newNote.appendChild(newButton)
 
+    // Make note unamed if no content
     if (note.title.length > 0) {
         textEl.textContent = note.title
     } else {
