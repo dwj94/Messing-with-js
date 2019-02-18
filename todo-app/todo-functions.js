@@ -12,7 +12,11 @@ const getSavedTodos = function () {
 // save todos
 const saveTodos = function (todo, e) {
     e.preventDefault()
-    todo.push({text: e.target.elements.toDo.value, completed: false})
+    todo.push({
+        id: uuidv4(), 
+        text: e.target.elements.toDo.value, 
+        completed: false
+    })
     localStorage.setItem('todo', JSON.stringify(todo))
     e.target.elements.toDo.value = ''
 }
