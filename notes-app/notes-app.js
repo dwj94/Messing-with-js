@@ -1,3 +1,4 @@
+// if your require any more packages, browserify notes-app.js -o bundle.js
 const uuidv4 = require('uuid/v4')
 
 const notes = getSavedNotes()
