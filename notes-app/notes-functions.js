@@ -25,6 +25,9 @@ const generateNoteDom = function (note) {
     // setup the delete note button
     newButton.textContent = 'x'
     newButton.setAttribute('id', 'delete-note')
+    newButton.addEventListener('click', function (e) {
+        console.log(note)
+    })
     newNote.appendChild(newButton)
 
     // Make note unamed if no content

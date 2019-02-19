@@ -1,3 +1,5 @@
+const uuidv4 = require('uuid/v4')
+
 const notes = getSavedNotes()
 
 const filters = {
