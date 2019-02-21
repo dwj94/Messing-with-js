@@ -10,21 +10,23 @@ const getSavedTodos = function () {
 }
 
 // save todos
-const saveTodos = function (todo, e) {
-    e.preventDefault()
-    todo.push({
-        id: uuidv4(), 
-        text: e.target.elements.toDo.value, 
-        completed: false
-    })
+const saveTodos = function (todo) {
     localStorage.setItem('todo', JSON.stringify(todo))
-    e.target.elements.toDo.value = ''
+}
+
+const removeTodo = function (id, todo) {
+    const todoIndex = todo.findIndex(function (e) {
+        return e.id === id
+    })
+    if (todoIndex > -1) {
+        todo.splice(todoIndex, 1)
+    }
 }
 
 // render application todos based on filters
 const renderSearch = function (toDos, filter) {
     const filteredToDos = toDos.filter(function (todo) {
-        let show = !filters.hideCompleted || !todo.completed
+        let show = !filter.hideCompleted || !todo.completed
         const matchedToDo = todo.text.toLowerCase().includes(filter.searchText.toLowerCase())
         return matchedToDo && show
     })
@@ -32,13 +34,13 @@ const renderSearch = function (toDos, filter) {
     document.querySelector('#todos').innerHTML = ''
 
     filteredToDos.forEach(function (item, index) {
-        const toDoSearch = getDomElem(item)
+        const toDoSearch = getDomElem(item, toDos, filter)
         document.querySelector('#todos').appendChild(toDoSearch)
     })
 }
 
 // generate the dom elements for individual todos
-const getDomElem = function (item) {
+const getDomElem = function (item, todo, filter) {
     const todoItem = document.createElement('div')
     const checkbox = document.createElement('input')
     const text = document.createElement('span')
@@ -51,6 +53,12 @@ const getDomElem = function (item) {
     todoItem.appendChild(text)
 
     removeItem.textContent = 'x'
+    removeItem.addEventListener('click', function (e) {
+        removeTodo(item.id, todo)
+        saveTodos(todo)
+        document.querySelector('h4').replaceWith(countTodos(todo))
+        renderSearch(todo, filter)
+    })
     todoItem.appendChild(removeItem)
 
     return todoItem

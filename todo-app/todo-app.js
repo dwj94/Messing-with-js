@@ -1,3 +1,5 @@
+const uuidv4 = require('uuid/v4')
+
 let todo = getSavedTodos()
 
 const filters = {
@@ -15,8 +17,15 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
 })
 
 document.querySelector('#add-todo').addEventListener('submit', function (e) {
-    saveTodos(todo, e)
+    e.preventDefault()
+    todo.push({
+        id: uuidv4(), 
+        text: e.target.elements.toDo.value, 
+        completed: false
+    })
+    saveTodos(todo)
     renderSearch(todo, filters)
+    e.target.elements.toDo.value = ''
     document.querySelector('h4').replaceWith(countTodos(todo))
 })
 
