@@ -92,6 +92,7 @@ function v4(options, buf, offset) {
 module.exports = v4;
 
 },{"./lib/bytesToUuid":1,"./lib/rng":2}],4:[function(require,module,exports){
+// if your require any more packages, browserify notes-app.js -o bundle.js
 const uuidv4 = require('uuid/v4')
 
 const notes = getSavedNotes()
@@ -103,13 +104,15 @@ const filters = {
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function (e) {
+    const id = uuidv4()
+
     notes.push({
-        id: uuidv4(),
+        id: id,
         title: '',
         body: ''
     })
     saveNotes(notes)
-    renderNotes(notes, filters)
+    location.assign(`edit.html#${id}`)
 })
 
 document.querySelector('#search-text').addEventListener('input', function (e) {
