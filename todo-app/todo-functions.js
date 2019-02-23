@@ -52,6 +52,7 @@ const getDomElem = function (item, todoList, filter) {
         item.completed = e.target.checked
         saveTodos(todoList)
         document.querySelector('h4').replaceWith(countTodos(todoList))
+        renderSearch(todoList, filter)
     })
     todoItem.appendChild(checkbox)
 
