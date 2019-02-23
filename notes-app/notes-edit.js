@@ -1,0 +1,32 @@
+const noteId = location.hash.substring(1) // find the note id from the url
+const notes = getSavedNotes()
+
+const note = notes.find(function (note) {
+    return note.id === noteId
+})
+
+if (note === undefined) {
+    location.assign('/')
+}
+
+const titleElement = document.querySelector('#note-title')
+const bodyElement = document.querySelector('#note-body')
+
+titleElement.value = note.title
+bodyElement.value = note.body
+
+titleElement.addEventListener('input', function (e) {
+    note.title = e.target.value
+    saveNotes(notes)
+})
+
+bodyElement.addEventListener('input', function (e) {
+    note.body = e.target.value
+    saveNotes(notes)
+})
+
+document.querySelector('#remove-note').addEventListener('click', function (e) {
+    removeNote(note.id, notes)
+    saveNotes(notes)
+    location.assign('/')
+})
