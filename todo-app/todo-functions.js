@@ -40,13 +40,19 @@ const renderSearch = function (toDos, filter) {
 }
 
 // generate the dom elements for individual todos
-const getDomElem = function (item, todo, filter) {
+const getDomElem = function (item, todoList, filter) {
     const todoItem = document.createElement('div')
     const checkbox = document.createElement('input')
     const text = document.createElement('span')
     const removeItem = document.createElement('button')
 
     checkbox.setAttribute('type', 'checkbox')
+    checkbox.checked = item.completed
+    checkbox.addEventListener('change', function (e) {
+        item.completed = e.target.checked
+        saveTodos(todoList)
+        document.querySelector('h4').replaceWith(countTodos(todoList))
+    })
     todoItem.appendChild(checkbox)
 
     text.textContent = item.text
@@ -54,10 +60,10 @@ const getDomElem = function (item, todo, filter) {
 
     removeItem.textContent = 'x'
     removeItem.addEventListener('click', function (e) {
-        removeTodo(item.id, todo)
-        saveTodos(todo)
-        document.querySelector('h4').replaceWith(countTodos(todo))
-        renderSearch(todo, filter)
+        removeTodo(item.id, todoList)
+        saveTodos(todoList)
+        document.querySelector('h4').replaceWith(countTodos(todoList))
+        renderSearch(todoList, filter)
     })
     todoItem.appendChild(removeItem)
 
