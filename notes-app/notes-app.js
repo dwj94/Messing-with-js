@@ -36,3 +36,15 @@ window.addEventListener('storage', function (e) {
         renderNotes(notes, filters)
     }
 })
+
+const yesterday = new Date('23 February 2019')
+const lastYear = new Date ('24 February 2018')
+
+const timeYest = yesterday.getTime()
+const timeYear = lastYear.getTime()
+
+if (timeYest < timeYear) {
+    console.log(yesterday.toString())
+} else {
+    console.log(lastYear.toString())
+}
