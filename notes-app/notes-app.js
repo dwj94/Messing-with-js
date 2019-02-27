@@ -1,5 +1,6 @@
 // if your require any more packages, browserify notes-app.js -o bundle.js
 const uuidv4 = require('uuid/v4')
+const moment = require('moment')
 
 let notes = getSavedNotes()
 
@@ -37,14 +38,12 @@ window.addEventListener('storage', function (e) {
     }
 })
 
-const yesterday = new Date('23 February 2019')
-const lastYear = new Date ('24 February 2018')
 
-const timeYest = yesterday.getTime()
-const timeYear = lastYear.getTime()
+const now = moment()
+console.log(now.toString())
+console.log(now.minute())
+now.add(4, 'years').subtract(15, 'day')
+console.log(now.format('MMMM Do, YYYY'))
 
-if (timeYest < timeYear) {
-    console.log(yesterday.toString())
-} else {
-    console.log(lastYear.toString())
-}
+console.log(now.toString())
+console.log(now.fromNow())
