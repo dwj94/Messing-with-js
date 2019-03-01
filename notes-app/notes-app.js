@@ -1,6 +1,7 @@
 // if your require any more packages, browserify notes-app.js -o bundle.js
 const uuidv4 = require('uuid/v4')
 const moment = require('moment')
+const now = moment()
 
 let notes = getSavedNotes()
 
@@ -16,7 +17,9 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
     notes.push({
         id: id,
         title: '',
-        body: ''
+        body: '',
+        createdAt: now.unix(),
+        updatedAt: now.unix()
     })
     saveNotes(notes)
     location.assign(`edit.html#${id}`)
@@ -37,13 +40,3 @@ window.addEventListener('storage', function (e) {
         renderNotes(notes, filters)
     }
 })
-
-
-const now = moment()
-console.log(now.toString())
-console.log(now.minute())
-now.add(4, 'years').subtract(15, 'day')
-console.log(now.format('MMMM Do, YYYY'))
-
-console.log(now.toString())
-console.log(now.fromNow())

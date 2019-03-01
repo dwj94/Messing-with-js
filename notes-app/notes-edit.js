@@ -1,3 +1,6 @@
+const moment = require('moment')
+const now = moment()
+
 const noteId = location.hash.substring(1) // find the note id from the url
 let notes = getSavedNotes()
 
@@ -17,11 +20,13 @@ bodyElement.value = note.body
 
 titleElement.addEventListener('input', function (e) {
     note.title = e.target.value
+    note.updatedAt = now.unix()
     saveNotes(notes)
 })
 
 bodyElement.addEventListener('input', function (e) {
     note.body = e.target.value
+    note.updatedAt = now.unix()
     saveNotes(notes)
 })
 
