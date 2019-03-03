@@ -13,9 +13,11 @@ if (note === undefined) {
 
 const titleElement = document.querySelector('#note-title')
 const bodyElement = document.querySelector('#note-body')
+const lastEdited = document.querySelector('#time')
 
 titleElement.value = note.title
 bodyElement.value = note.body
+lastEdited.textContent = `Updated ${moment.unix(note.updatedAt).fromNow()}`
 
 titleElement.addEventListener('input', function (e) {
     const now = moment()
@@ -23,14 +25,16 @@ titleElement.addEventListener('input', function (e) {
     note.title = e.target.value
     note.updatedAt = now.unix()
     saveNotes(notes)
+    lastEdited.textContent = `Updated ${moment.unix(note.updatedAt).fromNow()}`
 })
 
 bodyElement.addEventListener('input', function (e) {
     const now = moment()
-    
+
     note.body = e.target.value
     note.updatedAt = now.unix()
     saveNotes(notes)
+    lastEdited.textContent = `Updated ${moment.unix(note.updatedAt).fromNow()}`
 })
 
 document.querySelector('#remove-note').addEventListener('click', function (e) {
