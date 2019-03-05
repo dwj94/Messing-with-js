@@ -58,6 +58,7 @@ const generateNoteDom = function (note, notes, filters) {
 
 // render application notes, set unique id on note
 const renderNotes = function (notes, filters) {
+    notes = sortNotes(notes, filters.sortBy)
     const filteredNotes = notes.filter(function (note) {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
     })
@@ -70,4 +71,41 @@ const renderNotes = function (notes, filters) {
         const newNote = generateNoteDom(item, notes, filters)
         document.querySelector('#notes').appendChild(newNote)
     })
+}
+
+const sortNotes = function (notes, sortBy) {
+    if (sortBy === 'byEdited') {
+        return notes.sort(function (a, b) {
+            if (a.updatedAt > b.updatedAt) {
+                return -1
+            } else if (a.updatedAt < b.updatedAt) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+
+    } else if (sortBy === 'byDate') {
+        return notes.sort(function (a, b) {
+            if (a.createdAt > b.createdAt){
+                return -1
+            } else if (a.createdAt < b.createdAt) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+    } else if (sortBy === 'byAlphabet') {
+        return notes.sort(function (a, b) {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                return -1
+            } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+    } else {
+        return notes
+    }
 }
