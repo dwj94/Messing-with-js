@@ -1,5 +1,5 @@
 // fetch existing todos from locatstorage
-const getSavedTodos = function () {
+const getSavedTodos = () => {
     const todoJSON = localStorage.getItem('todo')
 
     if (todoJSON !== null) {
@@ -10,22 +10,20 @@ const getSavedTodos = function () {
 }
 
 // save todos
-const saveTodos = function (todo) {
+const saveTodos = (todo) => {
     localStorage.setItem('todo', JSON.stringify(todo))
 }
 
-const removeTodo = function (id, todo) {
-    const todoIndex = todo.findIndex(function (e) {
-        return e.id === id
-    })
+const removeTodo = (id, todo) => {
+    const todoIndex = todo.findIndex((e) => e.id === id)
     if (todoIndex > -1) {
         todo.splice(todoIndex, 1)
     }
 }
 
 // render application todos based on filters
-const renderSearch = function (toDos, filter) {
-    const filteredToDos = toDos.filter(function (todo) {
+const renderSearch = (toDos, filter) => {
+    const filteredToDos = toDos.filter((todo) => {
         let show = !filter.hideCompleted || !todo.completed
         const matchedToDo = todo.text.toLowerCase().includes(filter.searchText.toLowerCase())
         return matchedToDo && show
@@ -33,14 +31,14 @@ const renderSearch = function (toDos, filter) {
 
     document.querySelector('#todos').innerHTML = ''
 
-    filteredToDos.forEach(function (item, index) {
+    filteredToDos.forEach((item, index) => {
         const toDoSearch = getDomElem(item, toDos, filter)
         document.querySelector('#todos').appendChild(toDoSearch)
     })
 }
 
 // generate the dom elements for individual todos
-const getDomElem = function (item, todoList, filter) {
+const getDomElem = (item, todoList, filter) => {
     const todoItem = document.createElement('div')
     const checkbox = document.createElement('input')
     const text = document.createElement('span')
@@ -48,7 +46,7 @@ const getDomElem = function (item, todoList, filter) {
 
     checkbox.setAttribute('type', 'checkbox')
     checkbox.checked = item.completed
-    checkbox.addEventListener('change', function (e) {
+    checkbox.addEventListener('change', (e) => {
         item.completed = e.target.checked
         saveTodos(todoList)
         document.querySelector('h4').replaceWith(countTodos(todoList))
@@ -60,7 +58,7 @@ const getDomElem = function (item, todoList, filter) {
     todoItem.appendChild(text)
 
     removeItem.textContent = 'x'
-    removeItem.addEventListener('click', function (e) {
+    removeItem.addEventListener('click', (e) => {
         removeTodo(item.id, todoList)
         saveTodos(todoList)
         document.querySelector('h4').replaceWith(countTodos(todoList))
@@ -72,9 +70,9 @@ const getDomElem = function (item, todoList, filter) {
 }
 
 // count remaining todos and return summary
-const countTodos = function (todo) {
+const countTodos = (todo) => {
     let remainingCount = 0
-    todo.forEach(function (item, index) {
+    todo.forEach((item, index) => {
         if (!item.completed) {
             remainingCount += 1
         }
