@@ -12,3 +12,6 @@ const showErrorPage = () => {
 }
 
 myAge >= 18 ? showPage() : showErrorPage()
+
+const team = ['Tyler', 'Dan']
+team.length <= 4 ? console.log(`Team is ${team.length}`) : console.log('Team is too big')
