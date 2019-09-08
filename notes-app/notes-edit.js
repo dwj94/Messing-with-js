@@ -5,7 +5,7 @@ let notes = getSavedNotes()
 
 let note = notes.find((note) => note.id === noteId)
 
-if (note === undefined) {
+if (!note) {
     location.assign('/')
 }
 
@@ -46,7 +46,7 @@ window.addEventListener('storage', (e) => {
         notes = JSON.parse(e.newValue)
         let note = notes.find((note) => note.id === noteId)
         
-        if (note === undefined) {
+        if (!note) {
             location.assign('/')
         }
         titleElement.value = note.title
